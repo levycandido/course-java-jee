@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+. <ui:param name="cadastro" value="active" />
+	<ui:define name="conteudo">
+
+		<h1 align="center">Cadastro de Ocorrencia</h1>
+		<p:separator />
+
+		<h:messages />
+
+	
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+			
+			<p:dataTable id="tblOcorrencias" var="ocorrencia"
+				value="listaSistemasBean.sistemas" rows="8" paginator="true"
+				editable="true" style="margin-bottom:20px">
+					<p:ajax event="rowEdit" listener="#{motivoBeanSec.onRowEdit}"
+					update=":form:msgs" />
+				<p:ajax event="rowEditCancel" listener="#{motivoBeanSec.onRowCancel}"
+					update=":form:msgs" />
+					
+      <p:column headerText="Data Inicio">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.id}" /></f:facet>
+               <f:facet name="input"><p:inputText id="modelInput" value="#{ocorrencia.id}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+
+ <p:column headerText="Data Incial">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.dataInicio}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.dataInicio}" style="width:100%" label="Data Inicio"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+        <p:column headerText="Data Incial">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.dataFim}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.dataFim}" style="width:100%" label="Data Inicio"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+         <p:column headerText="Indisponibilidade">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.indisponibilidade}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.indisponibilidade}" style="width:100%" label="Indisponibilidade"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+       
+<!--        l -->
+
+        <p:column headerText="Chamado">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.chamado}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.chamado}" style="width:100%" label="Chamado"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+        <p:column headerText="Sistema">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.sistema}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.sistema}" style="width:100%" label="sistema"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+        <p:column headerText="descricao">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.descricao}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.descricao}" style="width:100%" label="descricao"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+          <p:column headerText="atuação">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.atuacao}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.atuacao}" style="width:100%" label="atuacao"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+         <p:column headerText="Motivo">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{ocorrencia.motivo}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{ocorrencia.motivo}" style="width:100%" label="motivo"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+        <p:column style="width:32px">
+           <p:rowEditor />
+       </p:column>
+
+			
+<!-- 			 <p:column headerText="Indisponibilidade"> -->
+<!--            <p:cellEditor> -->
+<!--                <f:facet name="output"><h:outputText value="#{ocorrencia.indisponibilidade}" /></f:facet> -->
+<!--                <f:facet name="input"><p:inputText id="modelInput" value="#{ocorrencia.indisponibilidade}" style="width:100%"/></f:facet> -->
+<!--            </p:cellEditor> -->
+<!--        </p:column> -->
+
+			
+				
+<!-- 				<p:column headerText="Chamado"> -->
+<!-- 					<h:outputText value="#{ocorrencia.chamado}" /> -->
+<!-- 				</p:column> -->
+<!-- 				<p:column headerText="Sistema"> -->
+<!-- 					<h:outputText value="#{ocorrencia.sistema.nome}" /> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Motivo"> -->
+<!-- 					<h:outputText value="#{ocorrencia.motivo.descricao}" /> -->
+<!-- 				</p:column> -->
+
+
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
+

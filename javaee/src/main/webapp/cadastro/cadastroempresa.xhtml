@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+ <ui:param name="cadastro" value="active" />
+<ui:define name="conteudo">
+
+
+<div align="center">
+	<h1 >Cadastro de Empresa</h1>
+</div>
+		<h:messages />
+		
+
+		<h:form enctype="multipart/form-data" >
+		<h:messages />
+		 <div align="center" padding="50" >
+		 <p:separator/>
+		<h:panelGrid id="grid" columns="3"  style="padding-top: 10px;" cellpadding="3">
+			
+			<div>
+				<h:outputLabel value="Nome" styleClass="double"/>
+				<h:inputText value="#{empresaBean.empresa.nome}" required="true" styleClass="form-control"
+					requiredMessage="O Título é um campo obrigatório!" />
+			</div>
+			
+			<div>
+				<h:outputLabel value="Endereço" />
+				<h:inputText value="#{empresaBean.empresa.endereco}"
+					required="true" styleClass="form-control" requiredMessage="Endereço é Obrigatório">
+				</h:inputText>
+			</div>
+			<div>
+				<h:outputLabel value="Telefone" />
+				<h:inputText value="#{empresaBean.empresa.telefone}" required="true" styleClass="form-control"
+					requiredMessage="Nome da Empresa é Obrigatório">
+				
+				</h:inputText>
+			</div>
+			
+			<h:commandButton value="Cadastrar" action="#{empresaBean.salvar}" styleClass="btn btn-primary" />
+		</h:panelGrid>
+		</div>
+		
+		</h:form>
+		
+		
+		
+		
+	</ui:define>
+</ui:composition>
+
+</html>
+

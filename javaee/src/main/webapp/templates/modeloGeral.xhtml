@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+<title>Contact V16</title>
+	<meta charset="UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<ui:insert name="head">
+     </ui:insert>
+</h:head>
+<h:body>
+<p:layout fullPage="true"> 
+ 
+    <p:layoutUnit position="north" header="Controle de Ocorrências" resizable="false"
+    	 closable="true"  collapsible="false">
+    </p:layoutUnit>
+ 
+    
+    <p:layoutUnit position="west" ajax="true" size="250" resizable="true" closable="false" align="center"  closeSpeed="500" collapsible="false">
+     <h:form >
+       <p:panelMenu>
+          <p:submenu label="Cadastros">
+          	<p:menuitem value="Empresas" update=":myPanel"  ajax="true" outcome="/cadastro/cadastroempresa.xhtml"/>
+          	<p:menuitem value="Sistemas" update=":myPanel" ajax="true" outcome="/cadastro/cadastrosistema.xhtml"/>
+          	<p:menuitem value="Motivo" outcome="/cadastro/cadastromotivo.xhtml" ajax="true"/>
+          	<p:menuitem value="Ocorrencias" outcome="/cadastro/cadastroocorrencias.xhtml" ajax="true"/>
+          	<p:menuitem value="teste Alterado" outcome="/cadastronovo/cadastronovo.xhtml" ajax="true"/>
+          	<p:menuitem value="teste Original" outcome="/cadastronovo/cadastronovo2.xhtml" ajax="true"/>
+          	
+          	
+          </p:submenu>	
+          <p:submenu label="Relatórios">
+                    	<p:menuitem value="Empresa" update=":myPanel"  ajax="true" outcome="/lista/listamotivos.xhtml"/>
+                    	<p:menuitem value="Sistemas" update=":myPanel"  ajax="true" outcome="/lista/listamotivos.xhtml"/>
+                    	<p:menuitem value="Motivos" update=":myPanel"  ajax="true" outcome="/lista/listamotivos.xhtml"/>
+                    	<p:menuitem value="Ocorrências" update=":myPanel"  ajax="true" outcome="/lista/listasocorrencias.xhtml"/>
+                    	
+          </p:submenu>
+       <p:submenu label="Gráficos"></p:submenu>
+       
+       </p:panelMenu>
+      </h:form>
+    </p:layoutUnit>
+     
+  
+ 
+    <p:layoutUnit position="center" resizable="false"
+    	 closable="true"  collapsible="false" id="myPanel" >
+     
+      	 <ui:insert name="conteudo" ></ui:insert>
+    
+    </p:layoutUnit>
+    
+       
+     <p:layoutUnit position="south" header="Levy Candido&nbsp;&nbsp;" resizable="false" 
+     style="text-align:right" 
+    	 closable="false"  collapsible="false">
+    </p:layoutUnit>
+ 
+</p:layout>
+</h:body>
+
+</html>

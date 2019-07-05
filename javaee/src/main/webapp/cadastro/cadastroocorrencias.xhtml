@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+. <ui:param name="cadastro" value="active" />
+	<ui:define name="conteudo">
+
+		<h1 align="center">Cadastro de Ocorrencia</h1>
+
+		<h:form enctype="multipart/form-data" ajaxsingle="true">
+			<div align="center">
+				<h:panelGrid id="grid" columns="6" style="padding: 5px;text-align:right"
+					cellpadding="3" >
+
+					<div align="left">
+						<h:outputLabel value="Data Inicio" />
+						<p:calendar value="#{ocorrenciaBean.ocorrencia.dataInicio}"
+							pattern="dd/mm/yyyy" locale="pt" required="true"
+							requiredMessage="A Data inicio é um campo obrigatório!" />
+
+					</div>
+					<div>
+						<h:outputLabel value="Data   Fim " />
+						<p:calendar value="#{ocorrenciaBean.ocorrencia.dataFim}"
+							required="true" styleClass="form-control"
+							requiredMessage="A Data inicio é um campo obrigatório!" />
+					</div>
+
+
+					<div>
+						<h:outputLabel value="Número do Chamado" />
+						<h:inputText value="#{ocorrenciaBean.ocorrencia.chamado}"
+							required="true" styleClass="form-control2"
+							requiredMessage="O Número do Chamado é um campo obrigatório!" />
+					</div>
+
+					<div>
+						<h:outputLabel value="Indisponibilidade" />
+
+						<h:selectOneMenu
+							value="#{ocorrenciaBean.ocorrencia.indisponibilidade}"
+							converter="javax.faces.Character" id="indisponibilidade"
+							styleClass="form-control"
+							requiredMessage="A Indisponibilidade é Obrigatória"
+							required="true">
+							<f:selectItem itemValue="" itemLabel="Selecione a opção" />
+							<f:selectItem itemValue="S" itemLabel="Sim" />
+							<f:selectItem itemValue="N" itemLabel="Não" />
+
+						</h:selectOneMenu>
+
+					</div>
+
+					<div>
+						<h:outputLabel value="Descrição" />
+						<h:inputText value="#{ocorrenciaBean.ocorrencia.descricao}"
+							required="true" styleClass="form-control"
+							requiredMessage="O Número do Indisponibilidade é um campo obrigatório!" />
+					</div>
+
+
+
+					<div class="form-group">
+						<h:outputLabel value="Motivo" for="motivo" />
+						<h:selectOneMenu value="#{ocorrenciaBean.ocorrencia.motivo.id}"
+							converter="javax.faces.Integer" id="motivo"
+							styleClass="form-control" style="text-align:left"
+							requiredMessage="O Motivo é Obrigatória" required="true">
+							<f:selectItem itemValue="" itemLabel="Selecione o Motivo" />
+							<f:selectItems value="#{listaMotivosBean.motivos}" var="motivo"
+								itemValue="#{motivo.id}" itemLabel="#{motivo.descricao}" />
+						</h:selectOneMenu>
+					</div>
+					<div class="form-group">
+						<h:outputLabel value="Sistema" for="sistema" />
+						<h:selectOneMenu value="#{ocorrenciaBean.ocorrencia.sistema.id}"
+							converter="javax.faces.Integer" id="sistema"
+							styleClass="form-control"
+							requiredMessage="O Sistema é Obrigatória" required="true">
+							<f:selectItem itemValue="" itemLabel="Selecione o Sistema" />
+							<f:selectItems value="#{listaSistemasBean.sistemas}"
+								var="sistema" itemValue="#{sistema.id}"
+								itemLabel="#{sistema.descricao}" />
+						</h:selectOneMenu>
+					</div>
+
+					<div align="center">
+							<h:outputLabel value="Atuacao" />
+						<h:inputText value="#{ocorrenciaBean.ocorrencia.atuacao}"
+							required="true" styleClass="form-control"
+							requiredMessage="O Número do Indisponibilidade é um campo obrigatório!" />
+					</div>
+
+				</h:panelGrid>
+			</div>
+
+			<div align="center" style="padding: 10px;">
+				<h:commandButton value="Cadastrar" action="#{ocorrenciaBean.salvar}"
+					styleClass="btn btn-primary"
+					update=":frmOcorrenciaPesquisa:tblOcorrencias" />
+			</div>
+		</h:form>
+
+		<p:separator />
+
+		<h:messages />
+
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="tblOcorrencias" var="ocorrencia"
+				value="#{motivoBeanSec.ocorrencias}" rows="8" paginator="true"
+				editable="true" style="margin-bottom:20px">
+
+				<p:ajax event="rowEdit" listener="#{motivoBeanSec.onRowEdit}"
+					update=":form:msgs" />
+			<p:column headerText="ID">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.id}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="modelInput" value="#{ocorrencia.id}"
+								style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Data Incial">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.dataInicio}"
+								pattern="dd/mm/yyyy" locale="pt" />
+						</f:facet>
+						<f:facet name="input">
+							<p:calendar value="#{ocorrencia.dataInicio}" style="width:100%"
+								label="Data Inicio">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</p:calendar>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Data Final">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.dataFim}" pattern="dd/mm/yyyy"
+								locale="pt" />
+						</f:facet>
+						<f:facet name="input">
+							<p:calendar value="#{ocorrencia.dataFim}" style="width:100%"
+								label="Data Inicio">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</p:calendar>
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Indisponibilidade">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.indisponibilidade}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{ocorrencia.indisponibilidade}"
+								style="width:100%" label="Indisponibilidade" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<!--        l -->
+
+				<p:column headerText="Chamado">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.chamado}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{ocorrencia.chamado}" style="width:100%"
+								label="Chamado" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<p:column headerText="descricao">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.descricao}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{ocorrencia.descricao}" style="width:100%"
+								label="descricao" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="atuação">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.atuacao}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{ocorrencia.atuacao}" style="width:100%"
+								label="atuacao" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<!-- 				<p:column headerText="Motivo"> -->
+				<!-- 					<p:cellEditor> -->
+				<!-- 						<f:facet name="output"> -->
+				<!-- 							<h:outputText value="#{ocorrencia.motivo.descricao}" /> -->
+				<!-- 						</f:facet> -->
+				<!-- 						<f:facet name="input"> -->
+				<!-- 							<h:selectOneMenu value="#{ocorrencia.motivo.id}" -->
+				<!-- 								converter="javax.faces.Integer" id="mot" -->
+				<!-- 								styleClass="form-control" -->
+				<!-- 								requiredMessage="O Sistema é Obrigatório" required="true"> -->
+				<!-- 								<f:selectItems value="#{adminListaMotivoBean.motivos}" -->
+				<!-- 									var="motivo" itemValue="#{motivo.id}" -->
+				<!-- 									itemLabel="#{motivo.descricao}" /> -->
+				<!-- 							</h:selectOneMenu> -->
+				<!-- 						</f:facet> -->
+				<!-- 					</p:cellEditor> -->
+				<!-- 				</p:column> -->
+
+				<p:column headerText="Motivo">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.motivo.descricao}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu value="#{ocorrencia.motivo}"
+								converter="omnifaces.SelectItemsConverter"
+								styleClass="form-control">
+								<f:selectItems value="#{adminListaMotivoBean.motivos}"
+									var="motivo" itemValue="#{motivo}"
+									itemLabel="#{motivo.descricao}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Sistema">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{ocorrencia.sistema.nome}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu value="#{ocorrencia.sistema}"
+								converter="omnifaces.SelectItemsConverter">
+								 styleClass="form-control">
+								<f:selectItems value="#{listaSistemasBean.sistemas}"
+									var="sistema" itemValue="#{sistema}"
+									itemLabel="#{sistema.nome}" />
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>
+
